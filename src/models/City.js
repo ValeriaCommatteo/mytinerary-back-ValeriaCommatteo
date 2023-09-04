@@ -1,13 +1,13 @@
-const { Schema, model, Types } = require('mongoose')
+import mongoose from "mongoose";
 
-const citySchema = new Schema ({
-  nombre: { type:String, required:true },
-  country: { type:String, required:true },
-  place: { type:String, required:true },
-  imagen: { type:String, required:true },
-  dato: { type:String, required:true }
+const citySchema = new mongoose.Schema({
+    name: { type: String, required: true },
+    urlimage: { type: String, required: true },
+    city: { type: String, required: true },
+    country: {  type: String, required: true },
+    _itinerary: [{ type: mongoose.Types.ObjectId, ref: 'Itinerary', required: true }],
 })
 
-const City = model(collection, schema);
+const City = mongoose.model( 'City',citySchema )
 
-module.exports = City;
+export default City
