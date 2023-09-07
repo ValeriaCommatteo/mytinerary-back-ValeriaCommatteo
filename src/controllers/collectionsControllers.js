@@ -4,73 +4,73 @@ export const addCollection = async (req, res) => {
     try{
         let cities = [
             {
-                "urlimage": "https://imgur.com/kj0aOWF" ,
+                "urlimage": "https://imgur.com/kj0aOWF.jpg" ,
                 "name": "Snowy village",
-                "city": "Alemania",
+                "city": "Berlín",
                 "country": "Alemania"
             },
             {
-                "urlimage": "https://imgur.com/jyQxUp2" ,
+                "urlimage": "https://imgur.com/jyQxUp2.jpg" ,
                 "name": "Obelisk",
                 "city": "Buenos Aires",
                 "country": "Argentina"
             },
             {
-                "urlimage": "https://imgur.com/tOMjT6K" ,
+                "urlimage": "https://imgur.com/tOMjT6K.jpg" ,
                 "name": "Night landscape",
                 "city": "Toronto",
                 "country": "Canadá"
             },
             {
-                "urlimage": "https://imgur.com/zFcBzRA" ,
+                "urlimage": "https://imgur.com/zFcBzRA.jpg" ,
                 "name": "Lighthouse",
-                "city": "Havvana",
+                "city": "Habana",
                 "country": "Cuba"
             },
             {
-                "urlimage": "https://imgur.com/5UZiWpk",
+                "urlimage": "https://imgur.com/5UZiWpk.jpg",
                 "name": "Pyramids",
-                "city": "Egipto",
+                "city": "El Cairo",
                 "country": "Egipto"
             },
             {
-                "urlimage": "https://imgur.com/u4V9WwR",
+                "urlimage": "https://imgur.com/u4V9WwR.jpg",
                 "name": "Sunset",
                 "city": "Santorini",
                 "country": "Grecia"
             },
             {
-                "urlimage": "https://imgur.com/07fBVGi",
+                "urlimage": "https://imgur.com/07fBVGi.jpg",
                 "name": "Beach",
                 "city": "Ibiza",
                 "country": "España"
             },
             {
-                "urlimage": "https://imgur.com/HKQoYQ7",
+                "urlimage": "https://imgur.com/HKQoYQ7.jpg",
                 "name": "Channels",
                 "city": "Venecia",
                 "country": "Italia"
             },
             {
-                "urlimage": "https://imgur.com/2VvL3Uw",
+                "urlimage": "https://imgur.com/2VvL3Uw.jpg",
                 "name": "Bullet Train Avenue",
                 "city": "Tokyo",
                 "country": "Japon"
             },
             {
-                "urlimage": "https://imgur.com/D105j1a",
+                "urlimage": "https://imgur.com/D105j1a.jpg",
                 "name": "Big Ben",
                 "city": "Reino Unido",
                 "country": "Londres"
             },
             {
-                "urlimage": "https://imgur.com/1vSoxAK",
+                "urlimage": "https://imgur.com/1vSoxAK.jpg",
                 "name": "Beach",
-                "city": "Island Maldivas",
+                "city": "Malé",
                 "country": "Maldivas"
             },
             {
-                "urlimage": "https://imgur.com/En8TDBQ",
+                "urlimage": "https://imgur.com/En8TDBQ.jpg",
                 "name": "Hudson river",
                 "city": "New York",
                 "country": "EE.UU"
