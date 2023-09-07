@@ -1,13 +1,14 @@
-import mongoose from "mongoose";
+import { Schema, Types, model } from "mongoose";
 
-const citySchema = new mongoose.Schema({
+const citySchema = new Schema({
     name: { type: String, required: true },
     urlimage: { type: String, required: true },
     city: { type: String, required: true },
     country: {  type: String, required: true },
-    _itinerary: [{ type: mongoose.Types.ObjectId, ref: 'Itinerary', required: true }],
+    _itinerary: [{ type: Types.ObjectId, ref: 'Itinerary', required: true }],
+    description: [{ type: String }]
 })
 
-const City = mongoose.model( 'City',citySchema )
+const City = model( 'City',citySchema )
 
 export default City

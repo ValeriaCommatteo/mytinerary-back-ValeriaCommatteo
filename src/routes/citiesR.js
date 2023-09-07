@@ -5,10 +5,10 @@ import { addCollection } from "../controllers/collectionsControllers.js";
 const citiesR = Router()
 
 citiesR.get('/', allCities);
-citiesR.get('/:id', citiesById);
+citiesR.get('/city/:id', citiesById);
 citiesR.post('/', createCity);
-citiesR.put('/:id', upDateCity);
-citiesR.delete('/:id', deleteCity);
+citiesR.put('/city/id', upDateCity);
+citiesR.delete('/city/:id', deleteCity);
 citiesR.post("/collection", addCollection);
 
-export default citiesR;
+export default citiesR; 

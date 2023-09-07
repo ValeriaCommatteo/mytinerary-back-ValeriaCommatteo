@@ -1,85 +1,86 @@
-require('./db')
-
-const City = require('../models/City')
-
-const citiesColection = [
+[
     {
-        "urlimage": "https://imgur.com/kj0aOWF" ,
+        "urlimage": "https://i.imgur.com/kj0aOWF.jpg",
         "name": "Snowy village",
         "city": "Alemania",
-        "country": "Alemania"
+        "country": "Alemania",
+        "description": "Here would go the description of the city"
     },
     {
-        "urlimage": "https://imgur.com/jyQxUp2" ,
+        "urlimage": "https://i.imgur.com/jyQxUp2.jpg",
         "name": "Obelisk",
         "city": "Buenos Aires",
-        "country": "Argentina"
+        "country": "Argentina",
+        "description": "Here would go the description of the city"
     },
     {
-        "urlimage": "https://imgur.com/tOMjT6K" ,
+        "urlimage": "https://i.imgur.com/tOMjT6K.jpg",
         "name": "Night landscape",
         "city": "Toronto",
-        "country": "Canadá"
+        "country": "Canadá",
+        "description": "Here would go the description of the city"
     },
     {
-        "urlimage": "https://imgur.com/zFcBzRA" ,
+        "urlimage": "https://i.imgur.com/zFcBzRA.jpg",
         "name": "Lighthouse",
         "city": "Havvana",
-        "country": "Cuba"
+        "country": "Cuba",
+        "description": "Here would go the description of the city"
     },
     {
-        "urlimage": "https://imgur.com/5UZiWpk",
+        "urlimage": "https://i.imgur.com/5UZiWpk.jpg",
         "name": "Pyramids",
         "city": "Egipto",
-        "country": "Egipto"
+        "country": "Egipto",
+        "description": "Here would go the description of the city"
     },
     {
-        "urlimage": "https://imgur.com/u4V9WwR",
+        "urlimage": "https://i.imgur.com/u4V9WwR.jpg",
         "name": "Sunset",
         "city": "Santorini",
-        "country": "Grecia"
+        "country": "Grecia",
+        "description": "Here would go the description of the city"
     },
     {
-        "urlimage": "https://imgur.com/07fBVGi",
+        "urlimage": "https://i.imgur.com/07fBVGi.jpg",
         "name": "Beach",
         "city": "Ibiza",
-        "country": "España"
+        "country": "España",
+        "description": "Here would go the description of the city"
     },
     {
-        "urlimage": "https://imgur.com/HKQoYQ7",
+        "urlimage": "https://i.imgur.com/HKQoYQ7.jpg",
         "name": "Channels",
         "city": "Venecia",
-        "country": "Italia"
+        "country": "Italia",
+        "description": "Here would go the description of the city"
     },
     {
-        "urlimage": "https://imgur.com/2VvL3Uw",
+        "urlimage": "https://i.imgur.com/2VvL3Uw.jpg",
         "name": "Bullet Train Avenue",
         "city": "Tokyo",
-        "country": "Japon"
+        "country": "Japon",
+        "description": "Here would go the description of the city"
     },
     {
-        "urlimage": "https://imgur.com/D105j1a",
+        "urlimage": "https://i.imgur.com/D105j1a.jpg",
         "name": "Big Ben",
         "city": "Reino Unido",
-        "country": "Londres"
+        "country": "Londres",
+        "description": "Here would go the description of the city"
     },
     {
-        "urlimage": "https://imgur.com/1vSoxAK",
+        "urlimage": "https://i.imgur.com/1vSoxAK.jpg",
         "name": "Beach",
         "city": "Island Maldivas",
-        "country": "Maldivas"
+        "country": "Maldivas",
+        "description": "Here would go the description of the city"
     },
     {
-        "urlimage": "https://imgur.com/En8TDBQ",
+        "urlimage": "https://i.imgur.com/En8TDBQ.jpg",
         "name": "Hudson river",
         "city": "New York",
-        "country": "EE.UU"
+        "country": "EE.UU",
+        "description": "Here would go the description of the city"
     },
 ]
-    City.insertMany(citiesColection)
-    .then(() => {
-        console.log("Collection is successfully created");
-    })
-    .catch((error) => {
-        console.log(error);
-    })
