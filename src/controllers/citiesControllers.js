@@ -7,12 +7,12 @@ export const allCities = async (req, res) => {
         let cities = await City.find()
         // let cities = await City.find().populate('itinerary')
 
-        res.json(
+        res.status(200).json(
             cities
         )
 
     } catch (error) {
-        res.json({ messange: 'error' })
+        res.status(500).json({ message: 'error' })
     }
 
 }
@@ -20,16 +20,16 @@ export const allCities = async (req, res) => {
 export const citiesById = async (req, res) => {
     //obtiene una ciudad por ID
     try {
-        let { id } = req.query
+        let { id } = req.params // PARAMS SE PASA DIRECTAMENTE, QUERY SE PASA POR PARAMETRO ?XXX=XXX
 
         let city = await City.findById(id)
 
-        res.json(
+        res.status(200).json(
             city
         )
 
     } catch (error) {
-        res.json({ messange: 'error' })
+        res.status(500).json({ message: error })
     }
 }
 
@@ -56,7 +56,7 @@ export const upDateCity = async (req, res) => {
         })
 
     } catch (error) {
-        res.json({ messange: 'error' })
+        res.json({ message: 'error' })
     }
 }
 

@@ -6,7 +6,7 @@ import { authR } from '../routes/auth.js'
 const indexR = Router()
 
 indexR.use("/cities", citiesR)
-indexR.use("/itinerary", itineraryR)
+indexR.use("/itineraries", itineraryR)
 indexR.use("/user", authR)
 
 export default indexR

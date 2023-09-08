@@ -3,11 +3,11 @@ import { allItinerary, itineraryByCity, createItinerary, upDateItinerary, delete
 
 const itineraryR = Router()
 
-itineraryR.post('/', createItinerary);
-itineraryR.get('/:id', itineraryByCity);
 itineraryR.get('/', allItinerary);
-itineraryR.put('/:id', upDateItinerary);
-itineraryR.delete('/:id', deleteItinerary);
+itineraryR.get('/itineraryByCity/:id', itineraryByCity);
+itineraryR.post('/', createItinerary);
+itineraryR.put('/itinerary/:id', upDateItinerary);
+itineraryR.delete('/itinerary/:id', deleteItinerary);
 itineraryR.post("/collection", addCollectionItinerary);
 
 export default itineraryR;

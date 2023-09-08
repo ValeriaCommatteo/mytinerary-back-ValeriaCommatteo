@@ -1,7 +1,6 @@
 import express from 'express'
 import cors from 'cors'
 import './config/database.js'
-import citiesR from './routes/indexR.js'
 import indexR from './routes/indexR.js'
 import dotenv from 'dotenv'
 
