@@ -1,10 +1,14 @@
 import { Router } from "express";
-import  model  from  'mongoose';
-import  { verifyAuthData } from '../middlewares/verifications.js';
-import  { hashPassword } from '../middlewares/auth.js';
-import { register, login } from '../controllers/AuthController.js'
+import { singUpValidator } from '../middlewares/verifications.js';
+import { hashPassword, verifyPassword, verifyUserExists, generateToken } from '../middlewares/auth.js';
+import { register, login, logout, authenticate } from '../controllers/AuthController.js'
+import passport from "../middlewares/auth.js";
 
-export const authR = Router()
+const authR = Router()
 
-authR.post('/register', verifyAuthData, hashPassword, register)
-authR.post('/login', verifyAuthData, login)
+authR.post('/register', hashPassword, register, singUpValidator)
+authR.post('/signin', verifyUserExists, verifyPassword, generateToken, login)
+authR.post('/authenticate', passport.authenticate("jwt", {session: false}) ,generateToken, authenticate)
+authR.post('/signout', passport.authenticate("jwt", {session: false}), logout)
+
+export default authR

@@ -1,28 +1,67 @@
 import Joi from 'joi';
+import joiPwd from 'joi-password-complexity';
 
-const userSchema = Joi.object({
-    email: Joi.string().email().min(10).max(20).required({
-        'string.email': "Please enter a valid email",
-        'string.min': "Email must be at least 10 characters",
-        'string.max': "Email must be at most 20 characters",
-        'string.empy': "Please enter you email"
-    }),
-    password: Joi.string().alphanum().min(6).max(16).required(), /*TERMINAR EL CODIGO CON EL RESTO DE LOS REQUISISTOS */ 
-});
-
-export const verifyAuthData = (req, res, next) => {
-
-    const payload = req.body; /*Objeto de validacion */
-        const userValidated =  userSchema.validate(payload);
-
-    if(userValidated.error) {
-        return res.satatus(400).json({message : userValidated.error.details.map((err) => err.message)}) /*Mensaje de error por si o cumple con alguna caracteristica del esquema */
-    }    
-
-    next()
-
+export const complexityOptions = {
+    min: 4,
+    max: 26,
+    lowerCase: 2,
+    upperCase: 1,
+    numeric: 2,
+    symbol: 1,
+    requirementCount: 2,
 }
 
+export const singUpValidator = (req, res, next) => {
+
+    const registreSchema = Joi.object({
+    name: Joi.string().max(10).required().messages({
+        'any.required':'Name required',
+        'string.name': "Please enter a valid name",
+        'string.max': "Name must be at most 10 characters",
+        'string.empty': "Please enter you name"}),
+    surname: Joi.string().max(30).required().message({
+        'any.required':'Surname required',
+        'string.surname': "Please enter a valid surname",
+        'string.max': "Surname must be at most 30 characters",
+        'string.empty': "Please enter you surname"
+    }),
+    email: Joi.string().required().email({minDomainSegments: 2, tlds: { allow: ['com', 'net'] }}).message({
+        'any.required':'Email required',
+        'string.email': "Please enter a valid email",
+        'string.max': "Email must be at most 50 characters",
+        'string.empty': "Please enter you surname"
+    }),
+    password: Joi.joiPwd(complexityOptions).required().message({
+        'any.required':'Password required',
+        'string.password': "Please enter a valid surname",
+        'string.min': "Surname must be at most 30 characters",
+        'string.max': "Surname must be at most 30 characters",
+        'string.empty': "Please enter your password"
+    }),
+    photo: Joi.string().required().uri().message({
+        'any.required':'Photo required',
+        'string.uri': "Url invalid",
+        'string.empty': "Please enter you photo"
+    }),
+    country: Joi.any().required().message({
+        'any.required':'Country required',
+        'any.country': "Please enter a valid country",
+        'any.empty': "Please enter you country"
+    })
+
+})
+
+    const validate = registreSchema.validate( req.body, { abortEarly: false }) 
+ 
+        if (validate.error) {
+            return res.satatus(400).json({
+                message: "Validation error",
+                error: error.details
+            })
+        }
+
+        next()
+}
 
 export const verifyDataCities = (req, res, next) => {
 
