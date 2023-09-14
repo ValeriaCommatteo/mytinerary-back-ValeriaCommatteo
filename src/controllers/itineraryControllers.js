@@ -25,7 +25,7 @@ export const itineraryByCity = async (req, res) => {
         if (cityFound) {
             const itinerariesFound = await Itinerary.find({ _city: id })
             if (itinerariesFound.length == 0) {
-                return res.status(400).json({ "message": "itinerary not found" })
+                return res.status(200).json({ "message": "itinerary not found" })
             }
             return res.status(200).json({ itinerariesFound })
         }
@@ -39,23 +39,10 @@ export const createItinerary = async (req, res) => {
     //crea un itinerario
     console.log('createItinerary')
     try {
-        let { id } = req.query
-
-        let cityFound = await City.findById(id)
-
-        let newItinerary = await Itinerary.create({ ...infoItinerary, _city: cityFound })
-
-        await cityFound.unDateOne({ _itinerary: [...cityFound._itinerary, newItinerary] })
-
-        let cityFoundUpdated = await City.findeById(id).populate('itinerary')
-
-        res.status(201).json({
-            "message": "itinerary has been create successfully",
-            "city": cityFoundUpdated
-        })
-
+        const newItinerary = await Itinerary.create( req.body )
+        res.status(201).json( { newItinerary: newItinerary } )
     } catch (error) {
-        res.json({ messange: 'error' })
+        res.status(500).json( error )
     }
 }
 

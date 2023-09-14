@@ -11,7 +11,6 @@ const options = {
 }
 
 const fn = async (jwt_payload, next ) => {
-    
     try {
 
         const user = await User.findOne ({ email: jwt_payload.email })
@@ -22,7 +21,7 @@ const fn = async (jwt_payload, next ) => {
         next (null, user )
 
     }catch(error){
-        document( error, false)
+        next( error, false)
     }
 
 }
@@ -34,7 +33,7 @@ export const hashPassword = (req, res, next) => {
     try {
 
         const passwordPlain = req.body.password
-        const hashPassword = bcrypt.hashSync()
+        const hashPassword = bcrypt.hashSync(passwordPlain, 10)
 
         req.body.password = hashPassword
 
@@ -77,11 +76,11 @@ export const verifyUserExists = async (req, res, next) => {
         }
 }
 
-export const generateToken = (req, res, netx) => {
+export const generateToken = (req, res, next) => {
     try {
 
         let secretKey = "claveSuperSecreta"
-        let token = jwt.sing({email: req.body.email}, secretKey, {expiresIn:60*3})
+        let token = jwt.sign({email: req.body.email}, secretKey, {expiresIn:60*3})
         req.token = token
         next()
         

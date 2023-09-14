@@ -3,8 +3,8 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
 export const register = async (req, res) => {
-
     try {
+        // return res.status(200).json({message:"Todo ok"})
 
         const { password, email } = req.body
         const userExists = await User.findOne({ email })
@@ -20,17 +20,17 @@ export const register = async (req, res) => {
 
         const newUser = await User.create( newObj )
 
-        const userResponse = { email: userExists.email, photo: userExists.photo, name: userExists.name, _id: userExists._id  }
+        const userResponse = { email: newUser.email, name:newUser.name, _id: newUser._id  }
 
         const token = jwt.sign({ email: newUser.email }, "claveSuperSecreta" , { expiresIn:60*3} )
 
         return res.status(201).json({ success:true, user: userResponse, token : token })
 
     }catch(error){
-        res.json({ success: false, error: error})
+        res.status(400).json({ success: false, error: error})
 
     }
-};
+}
 
 export const login = async () => {
     try {
@@ -60,9 +60,12 @@ export const login = async () => {
 }
 
 export const authenticate = async (req, res) => {
-
+    try {
         const userResponse = {  email: userExists.email, photo: userExists.photo, name: userExists.name, _id: userExists._id }
         res.status(200).json( { success: true, user: userResponse})
+    } catch (error) {
+        res.status(400).json({message: error.message})
+    }
 
 }
 export const logout = async (req, res) => {
