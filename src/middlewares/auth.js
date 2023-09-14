@@ -1,41 +1,41 @@
 import bcrypt from 'bcrypt';
-import { model } from 'mongoose';
 import passport from 'passport';
 import { Strategy, ExtractJwt} from 'passport-jwt';
 import  jwt from 'jsonwebtoken';
 import User from '../models/User.js';
 
-const options = {
-    jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-    secretOrKey: "claveSuperSecreta"
-}
+// const options = {
+//     jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+//     secretOrKey: "claveSuperSecreta"
+// }
 
-const fn = async (jwt_payload, next ) => {
-    try {
-
-        const user = await User.findOne ({ email: jwt_payload.email })
-
-        if (!user){
-            next(null, false);
+export const passportV = passport.use(
+    new Strategy({
+        jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+        secretOrKey: 'claveSuperSecreta'
+      }, async (payload, done) => {
+        try {
+          let userFound = await User.findOne({email: payload.email})
+          if (userFound) return done(null, userFound)
+          else return done(null)
         }
-        next (null, user )
+        catch (error) {
+          return done(error)
+        }
+      })
+    )
+    
 
-    }catch(error){
-        next( error, false)
-    }
-
-}
-
-export default passport.use ( new Strategy( options, fn ) )
+// export default passport.use ( new Strategy( options, fn ) )
 
 export const hashPassword = (req, res, next) => {
     
     try {
 
-        const passwordPlain = req.body.password
-        const hashPassword = bcrypt.hashSync(passwordPlain, 10)
+        const passwordPlain = req.body.password;
+        const hashPassword = bcrypt.hashSync(passwordPlain, 10);
 
-        req.body.password = hashPassword
+        req.body.password = hashPassword;
 
         next()
 
@@ -44,10 +44,10 @@ export const hashPassword = (req, res, next) => {
     }
 
 }
-
 export const verifyPassword = (req, res, next) => {
 
     const passwordPlain = req.body.password;
+    console.log(req.user)
     const hashPassword = req.user.password;
     const isValid = bcrypt.compareSync(passwordPlain, hashPassword)
    
@@ -71,7 +71,7 @@ export const verifyUserExists = async (req, res, next) => {
           next();
 
         }else{
-            return res.status(400).json({message:"User not founded"});
+            return res.status(400).json({message:"User not found"});
 
         }
 }

@@ -1,6 +1,8 @@
 import User from '../models/User.js';
 import bcrypt from 'bcryptjs';
+// import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
+import { verifyPassword } from '../middlewares/auth.js';
 
 export const register = async (req, res) => {
     try {
@@ -32,42 +34,39 @@ export const register = async (req, res) => {
     }
 }
 
-export const login = async () => {
+export const login = async (req, res) => {
+    
     try {
+        res.status(200).json({ message: "Succesfully logged in", token: req.token,
+            user: {
+                email: req.user.email,
+                id: req.user._id,
+                urlimage: req.user.urlimage,
+                firstName: req.user.firstName
 
-        const { email, password } = req.body
-        const userExists = await User.findOne({ email })
+            }
+        })
 
-        if (!userExists){
-            return res.json({ success: false, error: "Email o password incorrect"})
-        }
-
-        const validPassword = bcrypt.compareSync( password, userExists.password)
-
-        if (!validPassword) {
-            return res.json({ success: false, error: "Email o password incorrect"})
-        }
-
-        const userResponse = { email: userExists.email, photo: userExists.photo, name: userExists.name, _id: userExists._id }
-        const token = jwt.sign({ email: userExists.email}, "claveSuperSecreta" )
-
-        return res.status(200).json({ success: true, user:userResponse, token: token })
-
-    }catch (err){
-        res.status(400).json({ message: err.message})
-        
+    } catch (error) {
+        res.status(400).json({message: error.message})
     }
 }
 
 export const authenticate = async (req, res) => {
-    try {
-        const userResponse = {  email: userExists.email, photo: userExists.photo, name: userExists.name, _id: userExists._id }
-        res.status(200).json( { success: true, user: userResponse})
-    } catch (error) {
+    try {    
+        res.status(200).json({
+          message: 'User successfully authenticated',
+          token: req.token,
+          user: {
+            email: req.user.email,
+            id: req.user._id
+          }
+        })      
+      }
+      catch (error) {
         res.status(400).json({message: error.message})
+      }
     }
-
-}
 export const logout = async (req, res) => {
     
 
